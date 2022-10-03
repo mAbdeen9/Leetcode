@@ -1,14 +1,4 @@
-// Hey 👋🏻
-
-// -1 Roman to Integer
-
-// Example:
-// Input: s = "LVIII"
-// Output: 58
-// Explanation: L = 50, V= 5, III = 3.
-// I can be placed before V (5) and X (10) to make 4 and 9.
-// X can be placed before L (50) and C (100) to make 40 and 90.
-// C can be placed before D (500) and M (1000) to make 400 and 900.
+//  Roman to Integer
 
 const romanToInt = function (s) {
   let value = 0;
@@ -41,113 +31,70 @@ const romanToInt = function (s) {
 
 romanToInt("MCMXCIV"); //Output: 1994
 
-// -2 Add Two Numbers
-// You are given two non-empty linked lists representing two non-negative integers.
-// The digits are stored in reverse order, and each of their nodes contains a single digit.
-// Add the two numbers and return the sum as a linked list.
-// You may assume the two numbers do not contain any leading zero, except the number 0 itself.
-// Example : Input: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
-// Output: [8,9,9,9,0,0,0,1]
+//-----------------------
 
-/**
- * Definition for singly-linked list.
- * function ListNode(val, next) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.next = (next===undefined ? null : next)
- * }
- */
-/**
- * @param {ListNode} l1
- * @param {ListNode} l2
- * @return {ListNode}
- */
-const addTwoNumbers = function (l1, l2) {};
+class ListedList {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+  }
+  append(value) {
+    const node = { value: value, next: null };
+    if (!this.head) this.head = node;
+    if (this.tail) this.tail.next = node;
+    this.tail = node;
+  }
 
-// Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
-// You may assume that each input would have exactly one solution, and you may not use the same element twice.
-// You can return the answer in any order.
+  prepend(value) {
+    const node = { value: value, next: this.head };
+    this.head = node;
+    if (!this.tail) {
+      this.tail = node;
+    }
+  }
 
-// const twoSum = function (nums, target) {
-//   const better = (nums, target, memo) => {
-//     for (let index = 0; index < nums.length; index++) {
-//       for (let i = 0; i < nums.length; i++) {
-//         let comparingIndex = index === i ? ++i : i;
-//         memo;
-//         if (nums[index] + nums[comparingIndex] === target) {
-//           console.log(memo);
-//           return [index, comparingIndex];
-//         }
-//       }
-//     }
-//   };
-//   return better(nums, target, {});
-// };
+  toArray() {
+    const nodesListArray = [];
+    let curNode = this.head;
 
-// class ListedList {
-//   constructor() {
-//     this.head = null;
-//     this.tail = null;
-//   }
-//   append(value) {
-//     const node = { value: value, next: null };
-//     if (!this.head) this.head = node;
-//     if (this.tail) this.tail.next = node;
-//     this.tail = node;
-//   }
+    while (curNode) {
+      nodesListArray.push(curNode);
+      curNode = curNode.next;
+    }
 
-//   prepend(value) {
-//     const node = { value: value, next: this.head };
-//     this.head = node;
-//     if (!this.tail) {
-//       this.tail = node;
-//     }
-//   }
+    return nodesListArray;
+  }
 
-//   toArray() {
-//     const nodesListArray = [];
-//     let curNode = this.head;
+  delete(value) {
+    if (!this.head) return;
+    let curNode = this.head;
+    while (curNode) {
+      if (curNode.next?.value === value) {
+        curNode.next = curNode.next.next;
+      } else {
+        curNode = curNode.next;
+      }
+    }
 
-//     while (curNode) {
-//       nodesListArray.push(curNode);
-//       curNode = curNode.next;
-//     }
+    while (this.head?.value === value) {
+      this.head = this.head.next;
+    }
+  }
+}
 
-//     return nodesListArray;
-//   }
-
-//   delete(value) {
-//     if (!this.head) return;
-//     let curNode = this.head;
-//     while (curNode) {
-//       if (curNode.next?.value === value) {
-//         curNode.next = curNode.next.next;
-//       } else {
-//         curNode = curNode.next;
-//       }
-//     }
-
-//     while (this.head?.value === value) {
-//       this.head = this.head.next;
-//     }
-//   }
-// }
-
-// const test = new ListedList();
-// test.prepend(0);
-// test.append(1);
-// test.append(2);
-// test.append(3);
-// test.append(4);
-// test.delete(0);
+const test = new ListedList();
+test.prepend(0);
+test.append(1);
+test.append(2);
+test.append(3);
+test.append(4);
+test.delete(0);
 
 ///
 
 // Longest Substring Without Repeating Characters
-// Input: s = "pwwkew"
-// Output: 3
-// Explanation: The answer is "wke", with the length of 3.
-// Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
-function lengthOfLongestSubstring(string) {
+
+const lengthOfLongestSubstring = (string) => {
   let max = 0,
     pos,
     char,
@@ -160,19 +107,12 @@ function lengthOfLongestSubstring(string) {
     max = Math.max(max, currentStr.length);
   }
   return max;
-}
-// console.log(lengthOfLongestSubstring("abcefjddvddfd"));
-//
+};
 
-//
-
-//
-
-//
+// -----------
 
 const longestCommonPrefix = function (strs) {
   let preCommon = "";
-
   const minStr = strs.reduce((cur, acc) =>
     cur.length > acc.length ? acc : cur
   );
@@ -193,4 +133,13 @@ const longestCommonPrefix = function (strs) {
   return preCommon;
 };
 
-console.log(longestCommonPrefix(["cir", "car"]));
+// -----
+
+const isPalindrome = function (x) {
+  const strNum = x.toString();
+  const strNumReversed = strNum.split("").reverse().join("");
+
+  return strNum === strNumReversed;
+};
+
+// -----

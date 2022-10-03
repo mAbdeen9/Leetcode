@@ -67,78 +67,78 @@ const addTwoNumbers = function (l1, l2) {};
 // You may assume that each input would have exactly one solution, and you may not use the same element twice.
 // You can return the answer in any order.
 
-const twoSum = function (nums, target) {
-  const better = (nums, target, memo) => {
-    for (let index = 0; index < nums.length; index++) {
-      for (let i = 0; i < nums.length; i++) {
-        let comparingIndex = index === i ? ++i : i;
-        memo;
-        if (nums[index] + nums[comparingIndex] === target) {
-          console.log(memo);
-          return [index, comparingIndex];
-        }
-      }
-    }
-  };
-  return better(nums, target, {});
-};
+// const twoSum = function (nums, target) {
+//   const better = (nums, target, memo) => {
+//     for (let index = 0; index < nums.length; index++) {
+//       for (let i = 0; i < nums.length; i++) {
+//         let comparingIndex = index === i ? ++i : i;
+//         memo;
+//         if (nums[index] + nums[comparingIndex] === target) {
+//           console.log(memo);
+//           return [index, comparingIndex];
+//         }
+//       }
+//     }
+//   };
+//   return better(nums, target, {});
+// };
 
-class ListedList {
-  constructor() {
-    this.head = null;
-    this.tail = null;
-  }
-  append(value) {
-    const node = { value: value, next: null };
-    if (!this.head) this.head = node;
-    if (this.tail) this.tail.next = node;
-    this.tail = node;
-  }
+// class ListedList {
+//   constructor() {
+//     this.head = null;
+//     this.tail = null;
+//   }
+//   append(value) {
+//     const node = { value: value, next: null };
+//     if (!this.head) this.head = node;
+//     if (this.tail) this.tail.next = node;
+//     this.tail = node;
+//   }
 
-  prepend(value) {
-    const node = { value: value, next: this.head };
-    this.head = node;
-    if (!this.tail) {
-      this.tail = node;
-    }
-  }
+//   prepend(value) {
+//     const node = { value: value, next: this.head };
+//     this.head = node;
+//     if (!this.tail) {
+//       this.tail = node;
+//     }
+//   }
 
-  toArray() {
-    const nodesListArray = [];
-    let curNode = this.head;
+//   toArray() {
+//     const nodesListArray = [];
+//     let curNode = this.head;
 
-    while (curNode) {
-      nodesListArray.push(curNode);
-      curNode = curNode.next;
-    }
+//     while (curNode) {
+//       nodesListArray.push(curNode);
+//       curNode = curNode.next;
+//     }
 
-    return nodesListArray;
-  }
+//     return nodesListArray;
+//   }
 
-  delete(value) {
-    if (!this.head) return;
-    let curNode = this.head;
-    while (curNode) {
-      if (curNode.next?.value === value) {
-        curNode.next = curNode.next.next;
-      } else {
-        curNode = curNode.next;
-      }
-    }
+//   delete(value) {
+//     if (!this.head) return;
+//     let curNode = this.head;
+//     while (curNode) {
+//       if (curNode.next?.value === value) {
+//         curNode.next = curNode.next.next;
+//       } else {
+//         curNode = curNode.next;
+//       }
+//     }
 
-    while (this.head?.value === value) {
-      this.head = this.head.next;
-    }
-  }
-}
+//     while (this.head?.value === value) {
+//       this.head = this.head.next;
+//     }
+//   }
+// }
 
-const test = new ListedList();
-test.prepend(0);
-test.append(1);
-test.append(2);
-test.append(3);
-test.append(4);
-test.delete(0);
+// const test = new ListedList();
+// test.prepend(0);
+// test.append(1);
+// test.append(2);
+// test.append(3);
+// test.append(4);
+// test.delete(0);
 
 ///
 
@@ -161,4 +161,36 @@ function lengthOfLongestSubstring(string) {
   }
   return max;
 }
-console.log(lengthOfLongestSubstring("abcefjddvddfd"));
+// console.log(lengthOfLongestSubstring("abcefjddvddfd"));
+//
+
+//
+
+//
+
+//
+
+const longestCommonPrefix = function (strs) {
+  let preCommon = "";
+
+  const minStr = strs.reduce((cur, acc) =>
+    cur.length > acc.length ? acc : cur
+  );
+
+  for (let i = 0; i < minStr.length; i++) {
+    let line = "";
+    for (let e = 0; e < strs.length; e++) {
+      line += strs[e][i];
+    }
+
+    if ([...new Set(line.split(""))].length === 1) {
+      preCommon = preCommon + [...new Set(line.split(""))].join("");
+    } else {
+      return preCommon;
+    }
+  }
+
+  return preCommon;
+};
+
+console.log(longestCommonPrefix(["cir", "car"]));

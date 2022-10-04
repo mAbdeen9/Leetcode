@@ -145,7 +145,7 @@ const isPalindrome = function (x) {
 // -----
 // Given a sorted array of distinct integers and a target value, return the index if the target is found.
 // If not, return the index where it would be if it were inserted in order.
-// You must write an algorithm with O(log n) runtime complexity.
+
 const searchInsert = function (arr, target) {
   if (arr.includes(target)) return arr.indexOf(target);
   if (arr[arr.length - 1] < target) return arr.length;
@@ -153,5 +153,30 @@ const searchInsert = function (arr, target) {
     if (arr[i] >= target) return i;
   }
 };
-// [1,3,5,6]
-console.log(searchInsert([1, 3, 5, 6], 3));
+
+// ------
+
+// Alice has n balloons arranged on a rope. You are given a 0-indexed string
+//  colors where colors[i] is the color of the ith balloon.
+// Alice wants the rope to be colorful. She does not want two consecutive balloons to be of the same color,
+// so she asks Bob for help. Bob can remove some balloons from the rope to make it colorful.
+// You are given a 0-indexed integer array neededTime where neededTime[i] is the time (in seconds) that
+// Bob needs to remove the ith balloon from the rope.
+// Return the minimum time Bob needs to make the rope colorful.
+
+const minCost = function (colors, neededTime) {
+  let time = 0;
+
+  for (let i = 0; i < colors.length; i++) {
+    if (colors[i] == colors[i + 1]) {
+      time +=
+        neededTime[i] > neededTime[i + 1] ? neededTime[i + 1] : neededTime[i];
+      let index = neededTime[i] > neededTime[i + 1] ? i + 1 : i;
+      neededTime[index] = neededTime[i];
+    }
+  }
+
+  return time;
+};
+
+// minCost("aaabbbabbbb", [3, 5, 10, 7, 5, 3, 5, 5, 4, 8, 1]) // result 26

@@ -180,3 +180,42 @@ const minCost = function (colors, neededTime) {
 };
 
 // minCost("aaabbbabbbb", [3, 5, 10, 7, 5, 3, 5, 5, 4, 8, 1]) // result 26
+
+const isValid = function (s) {
+  const stringArr = s.split("");
+  const stack = [];
+  const parentheses = [
+    {
+      char: "(",
+      close: ")",
+    },
+    {
+      char: "{",
+      close: "}",
+    },
+    {
+      char: "[",
+      close: "]",
+    },
+  ];
+
+  for (let i = 0; i < stringArr.length; i++) {
+    const openChar = parentheses.find((obj) => obj.char === stringArr[i]);
+    if (openChar) {
+      stack.push(openChar.char);
+    } else {
+      const match = `${stack[stack.length - 1]}${stringArr[i]}`;
+      if (match === "[]" || match === "{}" || match === "()") {
+        stack.pop();
+      } else {
+        return false;
+      }
+    }
+  }
+
+  return stack.length <= 0 ? true : false;
+};
+
+let test1 = "{[({})]}{()}[]{}"; // true
+
+isValid(test1);

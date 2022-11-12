@@ -219,3 +219,49 @@ const isValid = function (s) {
 let test1 = "{[({})]}{()}[]{}"; // true
 
 isValid(test1);
+
+//
+
+const lengthOfLastWord = function (s) {
+  return s.trim().split(" ").splice(-1).join("").length;
+};
+
+lengthOfLastWord("   fly me   to   the moon  ");
+
+//
+
+const getWinner = (listOfBallots) => {
+  const results = {};
+
+  if ([...new Set(listOfBallots)].length === 1) return listOfBallots[0];
+
+  listOfBallots.forEach((ballot) => {
+    if (results.hasOwnProperty(ballot)) {
+      results[ballot] = results[ballot] + 1;
+    } else {
+      results[ballot] = 1;
+    }
+  });
+
+  //check if all are equels
+  const res = [];
+  for (let key in results) {
+    res.push(results[key]);
+  }
+
+  if ([...new Set(res)].length <= 1) return null;
+
+  let max = { candidate: "", numVoters: 0 };
+
+  for (let key in results) {
+    if (results[key] > max.numVoters)
+      max = { candidate: key, numVoters: results[key] };
+  }
+
+  if (listOfBallots.length / 2 >= max.numVoters) return null;
+
+  return max.candidate;
+};
+
+// //3 votes for "A", 2 votes for "B" -> "A" wins the election
+getWinner(["A"]);

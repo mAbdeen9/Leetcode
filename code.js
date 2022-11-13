@@ -243,7 +243,7 @@ const getWinner = (listOfBallots) => {
     }
   });
 
-  //check if all are equels
+  //check if all are equals
   const res = [];
   for (let key in results) {
     res.push(results[key]);
@@ -265,3 +265,18 @@ const getWinner = (listOfBallots) => {
 
 // //3 votes for "A", 2 votes for "B" -> "A" wins the election
 getWinner(["A"]);
+
+//
+
+const removeDuplicates = function (nums) {
+  let index = 1;
+  for (let i = 0; i < nums.length - 1; i++) {
+    if (nums[i] !== nums[i + 1]) {
+      nums[index] = nums[i + 1];
+      index++;
+    }
+  }
+  return nums;
+};
+
+removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]);

@@ -226,7 +226,7 @@ const lengthOfLastWord = function (s) {
   return s.trim().split(" ").splice(-1).join("").length;
 };
 
-lengthOfLastWord("   fly me   to   the moon  ");
+// lengthOfLastWord("   fly me   to   the moon  ");
 
 //
 
@@ -264,7 +264,7 @@ const getWinner = (listOfBallots) => {
 };
 
 // //3 votes for "A", 2 votes for "B" -> "A" wins the election
-getWinner(["A"]);
+// getWinner(["A"]);
 
 //
 
@@ -279,4 +279,72 @@ const removeDuplicates = function (nums) {
   return nums;
 };
 
-removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]);
+// removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]);
+
+// fibonacci sequence
+
+const fib = (index) => {
+  const fibonacciArray = [1, 1];
+
+  for (let i = 0; i < index; i++) {
+    fibonacciArray.push(fibonacciArray[i] + fibonacciArray[i + 1]);
+  }
+
+  return fibonacciArray[index];
+};
+
+// fib(4)
+
+// isPrime
+
+const isPrime = (number) => {
+  for (let i = number - 1; i > 1; i--) {
+    const divide = number / i;
+    if (divide === Math.floor(divide)) return false;
+  }
+
+  return true;
+};
+
+// isPrime(2312)
+
+// const binarySearch = (sortedArray, element) => {
+//   console.log("running");
+//   const shallowCopy = [...sortedArray];
+//   const middleIndex = Math.round(shallowCopy.length / 2);
+//   if (shallowCopy[middleIndex] < element) {
+//     return binarySearch(sortedArray.slice(middleIndex), element);
+//   }
+//   if (shallowCopy[middleIndex] > element) {
+//     return binarySearch(sortedArray.slice(0, middleIndex), element);
+//   }
+//   console.log(middleIndex);
+//   if (shallowCopy.length === 1) return shallowCopy[0];
+//   return shallowCopy[middleIndex];
+// };
+
+const binarySearch = (sortedArray, element) => {
+  let startIndex = 0;
+  let endIndex = sortedArray.length - 1;
+  while (startIndex <= endIndex) {
+    let middleIndex = startIndex + Math.floor(endIndex - startIndex / 2);
+
+    if (sortedArray[middleIndex] === element) {
+      return middleIndex;
+    }
+
+    if (sortedArray[middleIndex] < element) {
+      startIndex = middleIndex + 1;
+    } else {
+      endIndex = middleIndex - 1;
+    }
+  }
+
+  return -1;
+};
+
+// console.log(
+//   binarySearch([-7, -1, 3, 7, 32, 54, 192, 343, 554, 2043, 10234], 10234)
+// );
+
+// console.log(binarySearch([1, 2, 3, 4, 5], 2));

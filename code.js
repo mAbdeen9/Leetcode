@@ -348,3 +348,17 @@ const binarySearch = (sortedArray, element) => {
 // );
 
 // console.log(binarySearch([1, 2, 3, 4, 5], 2));
+
+const sortArray = (arr) => {
+  const result = [];
+
+  while (arr.length > 0) {
+    const smallest = arr.reduce((cur, acc) => (cur > acc ? acc : cur));
+    result.push(smallest);
+    arr.splice(arr.indexOf(smallest), 1);
+  }
+
+  return result;
+};
+
+console.log(sortArray([99, -14, 34, 123, 44, 2, -13]));

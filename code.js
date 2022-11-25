@@ -361,4 +361,37 @@ const sortArray = (arr) => {
   return result;
 };
 
-console.log(sortArray([99, -14, 34, 123, 44, 2, -13]));
+const maxBag = (arr, max) => {
+  const bag = [];
+  const result = [];
+  for (let e of arr) {
+    if (e.w <= max) {
+      bag.push({ ...e, valToWight: (e.val / e.w).toFixed(3) });
+    }
+  }
+
+  const sortedBag = bag.sort((a, b) => b.valToWight - a.valToWight);
+
+  let bagWight = 0;
+  for (let j of sortedBag) {
+    bagWight += j.w;
+    if (bagWight <= max) {
+      result.push({ id: j.id, val: j.val, w: j.w });
+    } else {
+      return result;
+    }
+  }
+  return result;
+};
+
+console.log(
+  maxBag(
+    [
+      { id: "a", val: 3, w: 3 },
+      { id: "b", val: 6, w: 8 },
+      { id: "c", val: 10, w: 3 },
+      { id: "e", val: 121, w: 1 },
+    ],
+    12
+  )
+);

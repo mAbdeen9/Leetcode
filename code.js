@@ -109,8 +109,6 @@ const lengthOfLongestSubstring = (string) => {
   return max;
 };
 
-// -----------
-
 const longestCommonPrefix = function (strs) {
   let preCommon = "";
   const minStr = strs.reduce((cur, acc) =>
@@ -364,6 +362,7 @@ const sortArray = (arr) => {
 const maxBag = (arr, max) => {
   const bag = [];
   const result = [];
+
   for (let e of arr) {
     if (e.w <= max) {
       bag.push({ ...e, valToWight: (e.val / e.w).toFixed(3) });
@@ -371,27 +370,94 @@ const maxBag = (arr, max) => {
   }
 
   const sortedBag = bag.sort((a, b) => b.valToWight - a.valToWight);
-
   let bagWight = 0;
+
   for (let j of sortedBag) {
     bagWight += j.w;
     if (bagWight <= max) {
       result.push({ id: j.id, val: j.val, w: j.w });
     } else {
-      return result;
+      const maxValueBag = Math.max(...bag.map((e) => e.val));
+      const e = bag.find((i) => i.val === maxValueBag);
+      const finalVal = result.reduce((acc, cur) => acc.val + cur.val);
+      return finalVal.val < maxValueBag
+        ? { id: e.id, val: e.val, w: e.w }
+        : result;
     }
   }
+
   return result;
 };
 
-console.log(
-  maxBag(
-    [
-      { id: "a", val: 3, w: 3 },
-      { id: "b", val: 6, w: 8 },
-      { id: "c", val: 10, w: 3 },
-      { id: "e", val: 121, w: 1 },
-    ],
-    12
-  )
-);
+// console.log(
+//   maxBag(
+//     [
+//       { id: "b", val: 6, w: 8 },
+//       { id: "a", val: 3, w: 3 },
+//       { id: "c", val: 10, w: 3 },
+//     ],
+//     8
+//   )
+// );
+
+//
+
+var removeElement = function (nums, val) {
+  nums = nums.filter((num) => num !== val);
+
+  return nums.length;
+};
+
+//
+
+const findMedianSortedArrays = function (nums1, nums2) {
+  const merged = [...nums1, ...nums2].sort((a, b) => a - b);
+
+  if (Math.ceil(merged.length / 2) !== merged.length / 2) {
+    return merged[Math.floor(merged.length / 2)];
+  }
+
+  const middle =
+    (merged[merged.length / 2] - merged[merged.length / 2 - 1]) / 2;
+
+  return middle + merged[merged.length / 2 - 1];
+};
+
+// console.log(findMedianSortedArrays([1, 2], [3, 4]));
+
+const longestPalindrome = function (s) {
+  const start = Date.now();
+  let result = [];
+
+  for (let i = 0; i < s.length; i++) {
+    let str = "";
+    for (let j = i + 1; j < s.length; j++) {
+      if (str === "") {
+        str = s[i] + s[j];
+      } else {
+        str += s[j];
+        if (result.includes(str)) continue;
+      }
+      let reversedStr = str.split("").reverse().join("");
+      if (str === reversedStr) {
+        result.push(str);
+      }
+    }
+  }
+  if (result.length < 1) {
+    return s[0];
+  }
+  const longest = result.reduce((cur, acc) =>
+    cur.length > acc.length ? cur : acc
+  );
+
+  const end = Date.now();
+  console.log(end - start);
+  return longest;
+};
+
+// console.log(
+//   longestPalindrome(
+//     "civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatthatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalargersensewecannotdedicatewecannotconsecratewecannothallowthisgroundThebravelmenlivinganddeadwhostruggledherehaveconsecrateditfaraboveourpoorponwertoaddordetractTgheworldadswfilllittlenotlenorlongrememberwhatwesayherebutitcanneverforgetwhattheydidhereItisforusthelivingrathertobededicatedheretotheulnfinishedworkwhichtheywhofoughtherehavethusfarsonoblyadvancedItisratherforustobeherededicatedtothegreattdafskremainingbeforeusthatfromthesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelastpfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavediedinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth"
+//   )
+// );

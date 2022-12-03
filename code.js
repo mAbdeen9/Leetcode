@@ -388,6 +388,7 @@ const maxBag = (arr, max) => {
 
   return result;
 };
+BigInt;
 
 // console.log(
 //   maxBag(
@@ -461,3 +462,54 @@ const longestPalindrome = function (s) {
 //     "civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatthatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalargersensewecannotdedicatewecannotconsecratewecannothallowthisgroundThebravelmenlivinganddeadwhostruggledherehaveconsecrateditfaraboveourpoorponwertoaddordetractTgheworldadswfilllittlenotlenorlongrememberwhatwesayherebutitcanneverforgetwhattheydidhereItisforusthelivingrathertobededicatedheretotheulnfinishedworkwhichtheywhofoughtherehavethusfarsonoblyadvancedItisratherforustobeherededicatedtothegreattdafskremainingbeforeusthatfromthesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelastpfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavediedinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth"
 //   )
 // );
+
+// console.log(plusOne([6, 1, 4, 5, 3, 9, 0, 1, 9, 5, 1, 8, 6, 7, 0, 5, 5, 4, 3]));
+
+var addBinary = function (a, b) {
+  let reveresA = a.split("").reverse().join("");
+  let reveresB = b.split("").reverse().join("");
+
+  let aRes = 0;
+  let bRes = 0;
+
+  for (let i = 0; i < a.length; i++) {
+    aRes += Math.pow(2, i) * reveresA[i];
+  }
+
+  for (let i = 0; i < b.length; i++) {
+    bRes += Math.pow(2, i) * reveresB[i];
+  }
+
+  let sumAsDecimal = aRes + bRes;
+
+  let resultAsBinary;
+  if (sumAsDecimal == 0) return "0";
+  while (sumAsDecimal > 0) {
+    if (sumAsDecimal / 2 === Math.ceil(sumAsDecimal / 2)) {
+      if (resultAsBinary === undefined) {
+        resultAsBinary = "0";
+        sumAsDecimal = Math.floor(sumAsDecimal / 2);
+        continue;
+      }
+      resultAsBinary += "0";
+    } else {
+      if (resultAsBinary === undefined) {
+        resultAsBinary = "1";
+        sumAsDecimal = Math.floor(sumAsDecimal / 2);
+        continue;
+      }
+      resultAsBinary += "1";
+    }
+
+    sumAsDecimal = Math.floor(sumAsDecimal / 2);
+  }
+
+  return resultAsBinary.split("").reverse().join("");
+};
+
+console.log(
+  addBinary(
+    "10100000100100110110010000010101111011011001101110111111111101000000101111001110001111100001101",
+    "110101001011101110001111100110001010100001101011101010000011011011001011101111001100000011011110011"
+  )
+);

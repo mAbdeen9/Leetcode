@@ -528,3 +528,51 @@ var reverse = function (x) {
 };
 
 // console.log(reverse(-123));
+
+const singleNumber = function (nums) {
+  const numbers = {};
+
+  for (let i of nums) {
+    if (!numbers.hasOwnProperty(i)) {
+      numbers[i] = 0;
+    } else {
+      numbers[i] = numbers[i] + 1;
+    }
+  }
+
+  for (let k in numbers) {
+    if (numbers[k] === 0) return [k];
+  }
+};
+
+// console.log(singleNumber([2, 1, 4, 2, 4]));
+
+var isUgly = function (num) {
+  if (num === 0) return false;
+  var n;
+  while (num !== 1) {
+    n = num / 5;
+    if (Math.floor(n) === n) {
+      num = n;
+      continue;
+    }
+
+    n = num / 3;
+    if (Math.floor(n) === n) {
+      num = n;
+      continue;
+    }
+
+    n = num / 2;
+    if (Math.floor(n) === n) {
+      num = n;
+      continue;
+    }
+
+    return false;
+  }
+
+  return true;
+};
+
+console.log(isUgly());

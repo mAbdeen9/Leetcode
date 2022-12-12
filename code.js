@@ -575,4 +575,4 @@ var isUgly = function (num) {
   return true;
 };
 
-console.log(isUgly());
+

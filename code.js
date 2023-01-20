@@ -33,7 +33,7 @@ romanToInt("MCMXCIV"); //Output: 1994
 
 //-----------------------
 
-class ListedList {
+class linkList {
   constructor() {
     this.head = null;
     this.tail = null;
@@ -82,13 +82,22 @@ class ListedList {
   }
 }
 
-const test = new ListedList();
-test.prepend(0);
-test.append(1);
-test.append(2);
-test.append(3);
-test.append(4);
-test.delete(0);
+const addTwoNumbers = (l1, l2) => {
+  const linkedList = new linkList();
+  const reversedL1 = l1.reverse().join("");
+  const reversedL2 = l2.reverse().join("");
+  const sum = (+reversedL1 + +reversedL2).toString().split("").reverse();
+
+  let i = 0;
+  while (sum.length > linkedList.toArray().length) {
+    linkedList.append(sum[i]);
+    i++;
+  }
+
+  return linkedList;
+};
+
+// console.log(addTwoNumbers([2, 4, 3], [5, 6, 4]));
 
 ///
 
@@ -575,4 +584,147 @@ var isUgly = function (num) {
   return true;
 };
 
+// Hash Table:
 
+class HashTable {
+  constructor(size) {
+    this.size = size;
+    this.buckets = Array(this.size)
+      .fill(null)
+      .map(() => []);
+  }
+
+  hash(key) {
+    let hash = 0;
+    for (let char of key) {
+      hash += char.charCodeAt(0);
+    }
+
+    return hash % this.size;
+  }
+
+  set(key, value) {
+    const index = this.hash(key);
+    const bucket = this.buckets[index];
+    const bucketElement = bucket.find((ele) => ele.key === key);
+    if (bucketElement) {
+      bucketElement.value = value;
+    } else {
+      bucket.push({ key: key, value: value });
+    }
+  }
+
+  get(key) {
+    const index = this.hash(key);
+    const getItem = this.buckets[index].find((item) => item.key === key);
+
+    return getItem;
+  }
+}
+
+const table = new HashTable(10);
+
+// table.set("name2", "Julia");
+// table.set("name", "mohamed");
+// table.set("name", "test");
+// table.set("lastName", "abdeen");
+// console.log(table.buckets);
+// console.log(table.get("lastName"));
+
+//Calculating with Functions
+
+function zero(operation) {
+  if (!operation) return 0;
+  if (operation.operator === "add") return 0 + +operation.value;
+  if (operation.operator === "sub") return 0 - +operation.value;
+  if (operation.operator === "multi") return 0 * +operation.value;
+  if (operation.operator === "division")
+    return Math.floor(0 / +operation.value);
+}
+function one(operation) {
+  if (!operation) return 1;
+  if (operation.operator === "add") return 1 + +operation.value;
+  if (operation.operator === "sub") return 1 - +operation.value;
+  if (operation.operator === "multi") return 1 * +operation.value;
+  if (operation.operator === "division")
+    return Math.floor(1 / +operation.value);
+}
+function two(operation) {
+  if (!operation) return 2;
+  if (operation.operator === "add") return 2 + +operation.value;
+  if (operation.operator === "sub") return 2 - +operation.value;
+  if (operation.operator === "multi") return 2 * +operation.value;
+  if (operation.operator === "division")
+    return Math.floor(2 / +operation.value);
+}
+function three(operation) {
+  if (!operation) return 3;
+  if (operation.operator === "add") return 3 + +operation.value;
+  if (operation.operator === "sub") return 3 - +operation.value;
+  if (operation.operator === "multi") return 3 * +operation.value;
+  if (operation.operator === "division")
+    return Math.floor(3 / +operation.value);
+}
+function four(operation) {
+  if (!operation) return 4;
+  if (operation.operator === "add") return 4 + +operation.value;
+  if (operation.operator === "sub") return 4 - +operation.value;
+  if (operation.operator === "multi") return 4 * +operation.value;
+  if (operation.operator === "division")
+    return Math.floor(4 / +operation.value);
+}
+function five(operation) {
+  if (!operation) return 5;
+  if (operation.operator === "add") return 5 + +operation.value;
+  if (operation.operator === "sub") return 5 - +operation.value;
+  if (operation.operator === "multi") return 5 * +operation.value;
+  if (operation.operator === "division")
+    return Math.floor(5 / +operation.value);
+}
+function six(operation) {
+  if (!operation) return 6;
+  if (operation.operator === "add") return 6 + +operation.value;
+  if (operation.operator === "sub") return 6 - +operation.value;
+  if (operation.operator === "multi") return 6 * +operation.value;
+  if (operation.operator === "division")
+    return Math.floor(6 / +operation.value);
+}
+function seven(operation) {
+  if (!operation) return 7;
+  if (operation.operator === "add") return 7 + +operation.value;
+  if (operation.operator === "sub") return 7 - +operation.value;
+  if (operation.operator === "multi") return 7 * +operation.value;
+  if (operation.operator === "division")
+    return Math.floor(7 / +operation.value);
+}
+function eight(operation) {
+  if (!operation) return 8;
+  if (operation.operator === "add") return 8 + +operation.value;
+  if (operation.operator === "sub") return 8 - +operation.value;
+  if (operation.operator === "multi") return 8 * +operation.value;
+  if (operation.operator === "division")
+    return Math.floor(8 / +operation.value);
+}
+function nine(operation) {
+  if (!operation) return 9;
+  if (operation.operator === "add") return 9 + +operation.value;
+  if (operation.operator === "sub") return 9 - +operation.value;
+  if (operation.operator === "multi") return 9 * +operation.value;
+  if (operation.operator === "division")
+    return Math.floor(9 / +operation.value);
+}
+
+function plus(num) {
+  return { operator: "add", value: num };
+}
+function minus() {
+  return { operator: "sub", value: num };
+}
+function times() {
+  return { operator: "multi", value: num };
+}
+function dividedBy() {
+  return { operator: "division", value: num };
+}
+
+console.log(zero(plus(2)));

@@ -717,14 +717,47 @@ function nine(operation) {
 function plus(num) {
   return { operator: "add", value: num };
 }
-function minus() {
+function minus(num) {
   return { operator: "sub", value: num };
 }
-function times() {
+function times(num) {
   return { operator: "multi", value: num };
 }
-function dividedBy() {
+function dividedBy(num) {
   return { operator: "division", value: num };
 }
 
-console.log(zero(plus(2)));
+// console.log(zero(plus(2)));
+
+class ListNode {
+  constructor(val, next) {
+    this.val = val === undefined ? 0 : val;
+    this.next = next === undefined ? null : next;
+  }
+}
+
+const mergeTwoLists = function (list1, list2) {
+  let curNode = new ListNode();
+  let dummy = curNode;
+  while (list1 && list2) {
+    if (list1.val < list2.val) {
+      curNode.next = list1;
+      list1 = list1.next;
+    } else {
+      curNode.next = list2;
+      list2 = list2.next;
+    }
+    curNode = curNode.next;
+  }
+
+  if (list1) {
+    curNode.next = list1;
+  }
+  if (list2) {
+    curNode.next = list2;
+  }
+
+  return dummy.next;
+};
+
+console.log(mergeTwoLists([1, 2, 4], [1, 3, 4]));

@@ -760,4 +760,36 @@ const mergeTwoLists = function (list1, list2) {
   return dummy.next;
 };
 
-console.log(mergeTwoLists([1, 2, 4], [1, 3, 4]));
+// console.log(mergeTwoLists([1, 2, 4], [1, 3, 4]));
+
+const findJudge = function (n, trust) {
+  if (trust.length == 0 && n == 1) return 1;
+  const data = {};
+  for (let i = 0; i < trust.length; i++) {
+    if (!data[trust[i][1]]) {
+      data[trust[i][1]] = 1;
+    } else {
+      data[trust[i][1]] += 1;
+    }
+  }
+
+  for (let i in data) {
+    if (data[i] == n - 1) {
+      for (let j = 0; j < trust.length; j++) {
+        if (trust[j][0] == i) return -1;
+      }
+
+      return i;
+    }
+  }
+
+  return -1;
+};
+
+// console.log(
+//   findJudge(3, [
+//     [1, 3],
+//     [2, 3],
+//     [3, 1],
+//   ])
+// );

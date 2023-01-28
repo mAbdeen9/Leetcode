@@ -793,3 +793,29 @@ const findJudge = function (n, trust) {
 //     [3, 1],
 //   ])
 // );
+
+const climbStairs = function (n) {
+  const febArr = [1, 1];
+  for (let i = 0; i < n; i++) {
+    febArr.push(febArr[i] + febArr[i + 1]);
+  }
+  console.log(febArr);
+  return febArr[n];
+};
+
+const climbStairsRecessive = (n, memo) => {
+  let result;
+  if (memo[n]) {
+    return memo[n];
+  }
+  if (n == 0 || n == 1) {
+    result = 1;
+  } else {
+    result =
+      climbStairsRecessive(n - 1, memo) + climbStairsRecessive(n - 2, memo);
+  }
+  memo[n] = result;
+  return result;
+};
+// console.log(climbStairs(42));
+// console.log(climbStairsRecessive(42, {}));

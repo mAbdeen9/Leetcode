@@ -819,3 +819,34 @@ const climbStairsRecessive = (n, memo) => {
 };
 // console.log(climbStairs(42));
 // console.log(climbStairsRecessive(42, {}));
+
+// function TreeNode(val, left, right) {
+//   this.val = val === undefined ? 0 : val;
+//   this.left = left === undefined ? null : left;
+//   this.right = right === undefined ? null : right;
+// }
+
+// const exNode = {
+//   val: 3,
+//   left: { val: 9, right: null, left: null },
+//   right: {
+//     val: 20,
+//     right: { val: 7, right: null, left: null },
+//     left: { val: 15, right: null, left: { val: 33, right: null, left: null } },
+//   },
+// };
+
+var maxDepth = function (root) {
+  let maxDepth = 0;
+  let digNode = (node, level) => {
+    if (!node) return;
+
+    if (maxDepth < level) maxDepth = level;
+    digNode(node.right, level + 1);
+    digNode(node.left, level + 1);
+  };
+
+  digNode(root, 1);
+
+  return maxDepth;
+};

@@ -850,3 +850,33 @@ var maxDepth = function (root) {
 
   return maxDepth;
 };
+
+var deleteDuplicates = function (head) {
+  let dummy = head;
+  while (head && head.next) {
+    if (head.next.val == head.val) {
+      head.next = head.next.next;
+    } else {
+      head = head.next;
+    }
+  }
+  return dummy;
+};
+
+var maxProfit = function (prices) {
+  const profits = [];
+  const subs = [];
+  for (let i = 0; i < prices.length - 1; i++) {
+    let compares = [];
+    for (let j = i + 1; j < prices.length; j++) {
+      if (compares.includes(prices[j])) {
+        continue;
+      }
+      profits.push(prices[j] - prices[i]);
+      compares.push(prices[j]);
+    }
+  }
+  return Math.max(...profits) > 0 ? Math.max(...profits) : 0;
+};
+
+console.log(maxProfit([7, 1, 5, 3, 6, 4, 4]));

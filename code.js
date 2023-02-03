@@ -851,6 +851,23 @@ var maxDepth = function (root) {
   return maxDepth;
 };
 
+var minDepth = function (root) {
+  let min = [];
+  let digNode = (node, level) => {
+    if (!node) return;
+    if (!node.right && !node.left) {
+      min.push(level);
+    }
+    digNode(node.left, level + 1);
+    digNode(node.right, level + 1);
+  };
+  digNode(root, 1);
+  if (min.length == 0) {
+    return 0;
+  }
+  return Math.min(...min);
+};
+
 var deleteDuplicates = function (head) {
   let dummy = head;
   while (head && head.next) {
@@ -879,4 +896,4 @@ var maxProfit = function (prices) {
   return Math.max(...profits) > 0 ? Math.max(...profits) : 0;
 };
 
-console.log(maxProfit([7, 1, 5, 3, 6, 4, 4]));
+// console.log(maxProfit([7, 1, 5, 3, 6, 4, 4]));

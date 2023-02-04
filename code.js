@@ -880,20 +880,39 @@ var deleteDuplicates = function (head) {
   return dummy;
 };
 
-var maxProfit = function (prices) {
-  const profits = [];
-  const subs = [];
-  for (let i = 0; i < prices.length - 1; i++) {
-    let compares = [];
-    for (let j = i + 1; j < prices.length; j++) {
-      if (compares.includes(prices[j])) {
-        continue;
-      }
-      profits.push(prices[j] - prices[i]);
-      compares.push(prices[j]);
-    }
+// var maxProfit = function (prices) {
+//   const profits = [];
+//   const subs = [];
+//   for (let i = 0; i < prices.length - 1; i++) {
+//     let compares = [];
+//     for (let j = i + 1; j < prices.length; j++) {
+//       if (compares.includes(prices[j])) {
+//         continue;
+//       }
+//       profits.push(prices[j] - prices[i]);
+//       compares.push(prices[j]);
+//     }
+//   }
+//   return Math.max(...profits) > 0 ? Math.max(...profits) : 0;
+// };
+const adding = (arr) => {
+  let result = [];
+  for (let i = 0; i < arr.length - 1; i++) {
+    result.push(arr[i] + arr[i + 1]);
   }
-  return Math.max(...profits) > 0 ? Math.max(...profits) : 0;
+  return result;
 };
 
-// console.log(maxProfit([7, 1, 5, 3, 6, 4, 4]));
+const generate = function (numRows) {
+  const pascalTriangle = [[1], [1, 1]];
+  for (let i = 1; i < numRows - 1; i++) {
+    let [lastRow] = pascalTriangle.slice(-1);
+    let nums = adding(lastRow);
+    let pascalArr = [1, ...nums, 1];
+    pascalTriangle.push(pascalArr);
+  }
+
+  return pascalTriangle;
+};
+
+console.log(generate(5));

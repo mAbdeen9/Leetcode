@@ -142,13 +142,6 @@ const longestCommonPrefix = function (strs) {
 
 // -----
 
-const isPalindrome = function (x) {
-  const strNum = x.toString();
-  const strNumReversed = strNum.split("").reverse().join("");
-
-  return strNum === strNumReversed;
-};
-
 // -----
 // Given a sorted array of distinct integers and a target value, return the index if the target is found.
 // If not, return the index where it would be if it were inserted in order.
@@ -905,14 +898,92 @@ const adding = (arr) => {
 
 const generate = function (numRows) {
   const pascalTriangle = [[1], [1, 1]];
-  for (let i = 1; i < numRows - 1; i++) {
+  for (let i = 1; i < numRows; i++) {
     let [lastRow] = pascalTriangle.slice(-1);
     let nums = adding(lastRow);
     let pascalArr = [1, ...nums, 1];
     pascalTriangle.push(pascalArr);
   }
 
-  return pascalTriangle;
+  return pascalTriangle[numRows];
 };
 
-console.log(generate(5));
+const isPalindrome = function (s) {
+  const filterString = s
+    .toLowerCase()
+    .split("")
+    .filter((s) => s.toUpperCase() !== s.toLowerCase() || !isNaN(s))
+    .join("")
+    .split(" ")
+    .join("");
+  return filterString.split("").reverse().join("") == filterString;
+};
+
+// console.log(isPalindrome("A man, a plan, a canal: Panama"));
+
+// 17. Letter Combinations of a Phone Number
+const letterCombinations = function (digits) {
+  if (digits.length == 0) return [];
+  const result = [];
+  let possibilities = [];
+  const digitsValues = {
+    2: ["a", "b", "c"],
+    3: ["d", "e", "f"],
+    4: ["g", "h", "i"],
+    5: ["j", "k", "l"],
+    6: ["m", "n", "o"],
+    7: ["p", "q", "r", "s"],
+    8: ["t", "u", "v"],
+    9: ["w", "x", "y", "z"],
+  };
+  for (let i = 0; i < digits.length; i++) {
+    possibilities.push(digitsValues[digits[i]]);
+  }
+  if (possibilities.length == 1) return possibilities[0];
+
+  const firstDigits = possibilities.shift();
+  console.log(possibilities);
+  for (let i = 0; i < firstDigits.length; i++) {
+    for (let j = 0; j < possibilities.length + 1; j++) {
+      let str = firstDigits[i];
+
+      possibilities.forEach((element) => {
+        str += element[j];
+      });
+      result.push(str);
+    }
+  }
+
+  // return result;
+};
+
+// console.log(letterCombinations("234"));
+
+// Input: digits = "23"
+// Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+
+// Moving Zeros To The End
+
+// moveZeros([false,1,0,1,2,0,1,3,"a"]) // returns[false,1,1,2,1,3,"a",0,0]
+
+function moveZeros(arr) {
+  const filteredArr = arr.filter((e) => e !== 0);
+  arr.forEach((e) => (e === 0 ? filteredArr.push(e) : ""));
+
+  return filteredArr;
+}
+
+// console.log(moveZeros([8, false, {}, true, 3, 4, 4, "0"]));
+// console.log(moveZeros([false, 0, "0", 1, {}]));
+
+const mySqrt = function (x) {
+  if (x == 0) return 0;
+  if (x == 1) return 1;
+  if (x == 2) return 1;
+  for (let i = 1; i < x; i++) {
+    if (i * i === x) return i;
+    if (i * i > x) return i - 1;
+  }
+};
+
+console.log(mySqrt(3));

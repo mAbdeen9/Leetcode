@@ -986,4 +986,33 @@ const mySqrt = function (x) {
   }
 };
 
-console.log(mySqrt(3));
+// console.log(mySqrt(3));
+
+const capitals = function (word) {
+  const result = [];
+  word.split("").forEach((letter, index) => {
+    if (letter.toUpperCase() == letter) result.push(index);
+  });
+  return result;
+};
+
+// console.log(capitals("MohaMed"));
+
+const strStr = function (haystack, needle) {
+  if (!haystack.includes(needle)) return -1;
+  const haystackArray = haystack.split("");
+
+  for (let i = 0; i < haystackArray.length; i++) {
+    if (needle.startsWith(haystack[i])) {
+      let loop = 0;
+      let needleInStack = "";
+      while (needle[loop] == haystack[i + loop] && needle[loop] !== undefined) {
+        needleInStack += haystack[i + loop];
+        loop++;
+      }
+      if (needleInStack == needle) return i;
+    }
+  }
+};
+
+console.log(strStr("butsad", "sad"));

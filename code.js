@@ -1015,4 +1015,97 @@ const strStr = function (haystack, needle) {
   }
 };
 
-console.log(strStr("butsad", "sad"));
+function findMissingLetter(array) {
+  const alphabet = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z",
+  ];
+
+  const firstLetter = alphabet.find((e) => e == array[0].toUpperCase());
+  if (firstLetter) {
+    for (let i = 0; i < array.length; i++) {
+      if (
+        array[i].toUpperCase() != alphabet[alphabet.indexOf(firstLetter) + i]
+      ) {
+        return array[i].toUpperCase() == array[i]
+          ? alphabet[alphabet.indexOf(firstLetter) + i]
+          : alphabet[alphabet.indexOf(firstLetter) + i].toLowerCase();
+      }
+    }
+  }
+}
+
+//
+
+//
+
+//
+
+function humanReadable(num) {
+  let hours = 0;
+  let minutes = 0;
+  let seconds = 0;
+
+  while (num > 0) {
+    if (num < 60) {
+      seconds = num;
+      num = 0;
+    }
+
+    if (num >= 60) {
+      if (minutes >= 60) {
+        minutes = 0;
+        hours += 1;
+      }
+
+      minutes += 1;
+
+      if (minutes == 60) {
+        minutes = 0;
+        hours += 1;
+      }
+      num = num - 60;
+    }
+  }
+
+  return `${hours.toString().length < 2 ? `0${hours}` : hours}:${
+    minutes.toString().length < 2 ? `0${minutes}` : minutes
+  }:${seconds.toString().length < 2 ? `0${seconds}` : seconds}`;
+}
+
+// console.log(humanReadable(3600));
+
+async function sleep(millis) {
+  await new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("delay");
+    }, millis);
+  });
+}
+
+let t = Date.now();
+sleep(1000).then(() => console.log(Date.now() - t)); // 100

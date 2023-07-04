@@ -1099,13 +1099,72 @@ function humanReadable(num) {
 
 // console.log(humanReadable(3600));
 
-async function sleep(millis) {
-  await new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve("delay");
-    }, millis);
-  });
-}
+// async function sleep(millis) {
+//   await new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       resolve("delay");
+//     }, millis);
+//   });
+// }
 
-let t = Date.now();
-sleep(1000).then(() => console.log(Date.now() - t)); // 100
+// let t = Date.now();
+// sleep(1000).then(() => console.log(Date.now() - t)); // 100
+
+// const myPromise = async (num) => {
+//   return await new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       if (num > 5) {
+//         resolve("You Win 🎉");
+//       } else {
+//         reject("Game Over 🎰");
+//       }
+//     }, 1000);
+//   });
+// };
+
+// async function getPromiseValue(num) {
+//   try {
+//     const res = await myPromise(num);
+//     console.log(res);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
+
+// getPromiseValue(1);
+
+// const createCounter = function (n) {
+//   let closure = -1;
+//   return function () {
+//     closure++;
+//     return n + closure;
+//   };
+// };
+
+// /**
+//  * const counter = createCounter(10)
+//  * counter() // 10
+//  * counter() // 11
+//  * counter() // 12
+//  */
+// const counter = createCounter(10);
+
+// console.log(counter());
+// console.log(counter());
+// console.log(counter());
+
+// nums = [1,2,3,4]
+// fn = function sum(acc, curr) { return acc + curr; }
+// init = 0
+// Output: 10
+
+const reduce = function (nums, fn, init) {
+  if (nums.length <= 0) return init;
+  let acc = init;
+  nums.forEach((e) => {
+    const newAcc = fn(acc, e);
+    acc = newAcc;
+  });
+
+  return acc;
+};

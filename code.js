@@ -1173,4 +1173,43 @@ Array.prototype.last = function () {
   return this.length > 0 ? this[this.length - 1] : -1;
 };
 
-console.log([1, 3, 4].last());
+const flat = function (arr, n) {
+  const result = [];
+  let depth = n;
+
+  arr.forEach((e) => {
+    if (!Array.isArray(e)) {
+      result.push(e);
+    } else {
+      if (depth > 0) {
+        result.push(...flat(e, depth - 1));
+      } else {
+        result.push(e);
+      }
+    }
+  });
+
+  return result;
+};
+
+let arr = [1, 2, 3, [4, 5, 6], [7, 8, [9, 10, 11], 12], [13, 14, 15]];
+
+// console.log(flat(arr, 2));
+
+// Input: functions = [x => x + 1, x => x * x, x => 2 * x], x = 4
+// Output: 65
+
+const compose = function (f) {
+  const reverse = f.reverse();
+  return function (x) {
+    if (f.length <= 0) return x;
+    const result = reverse.map((e) => {
+      let oldX = x;
+      x = e(x);
+      return e(oldX);
+    });
+    return result.slice(-1)[0];
+  };
+};
+
+// console.log(compose([(x) => 10 * x, (x) => 10 * x, (x) => 10 * x]));

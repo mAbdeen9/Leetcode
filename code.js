@@ -1213,3 +1213,52 @@ const compose = function (f) {
 };
 
 // console.log(compose([(x) => 10 * x, (x) => 10 * x, (x) => 10 * x]));
+
+//  { increment: Function, decrement: Function, reset: Function }
+
+const createCounter = function (init) {
+  class Counter {
+    constructor(init) {
+      this.value = init;
+    }
+
+    increment() {
+      this.value++;
+      return this.value;
+    }
+
+    decrement() {
+      this.value--;
+      return this.value;
+    }
+
+    reset() {
+      this.value = init;
+      return this.value;
+    }
+  }
+
+  return new Counter(init);
+};
+
+const majorityElement = function (nums) {
+  const arrayElements = {};
+  nums.forEach((num) => {
+    if (!arrayElements[num]) {
+      arrayElements[num] = 1;
+    } else {
+      arrayElements[num] = arrayElements[num] + 1;
+    }
+  });
+  let majority;
+  let bigger = 0;
+  for (let num in arrayElements) {
+    if (arrayElements[num] > bigger) {
+      bigger = arrayElements[num];
+      majority = num;
+    }
+  }
+
+  return majority;
+};
+console.log(majorityElement([2, 2, 1, 1, 1, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 1]));

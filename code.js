@@ -1261,4 +1261,42 @@ const majorityElement = function (nums) {
 
   return majority;
 };
-console.log(majorityElement([2, 2, 1, 1, 1, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 1]));
+// console.log(majorityElement([2, 2, 1, 1, 1, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 1]));
+
+//
+
+///
+
+// Input: callCount = 5
+// Output: [0,1,1,2,3]
+// Explanation:
+// const gen = fibGenerator();
+// gen.next().value; // 0
+// gen.next().value; // 1
+// gen.next().value; // 1
+// gen.next().value; // 2
+// gen.next().value; // 3
+
+const fibGenerator = function* (callCount) {
+  let fibArray = [0, 1];
+
+  for (let i = 2; i < callCount; i++) {
+    fibArray.push(fibArray.slice(-2)[0] + fibArray.slice(-2)[1]);
+  }
+  yield [...fibArray];
+};
+
+// const ss = fibGenerator(5);
+
+// console.log(Object.keys({ name: "mohamed", age: 30 }).length);
+
+var sortBy = function (arr, fn) {
+  let arrayFromFn = arr.map((num) => {
+    const sortBy = fn(num);
+    return {
+      toReturn: num,
+      sortBy,
+    };
+  });
+  return arrayFromFn.sort((a, b) => a.sortBy - b.sortBy).map((e) => e.toReturn);
+};

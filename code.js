@@ -1300,3 +1300,26 @@ var sortBy = function (arr, fn) {
   });
   return arrayFromFn.sort((a, b) => a.sortBy - b.sortBy).map((e) => e.toReturn);
 };
+
+//
+
+const chunk = function (arr, size) {
+  const result = [];
+  let chunk = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (chunk.length < size) {
+      chunk.push(arr[i]);
+    }
+
+    if (chunk.length === size) {
+      result.push(chunk);
+      chunk = [];
+    } else if (i === arr.length - 1) {
+      result.push(chunk);
+    }
+  }
+
+  return result;
+};
+
+console.log(chunk([1, 9, 6, 3, 2], 3));
